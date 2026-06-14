@@ -51,7 +51,6 @@ def load_data(directory):
             except KeyError:
                 pass
 
-
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
@@ -90,25 +89,23 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-# Check if source and target are the same
-    if source == target:
-        sys.exit("Source and Target are the same.")
-    
     # Initialize the frontier with the starting position
     start = Node(state=source, parent=None, action=None)
+
+
+    # Check if start and target are the same
+    if target == source:
+        path = []
+        return path
+
     frontier = QueueFrontier()
     frontier.add(start)
     # Initialize an empty explored set
     explored = set()
 
-    # Add a counter to track the number of nodes explored
-    #cpt = 0
     while not frontier.empty():
         # Remove a node from the frontier
         node = frontier.remove()
-
-    #    cpt += 1
-    #    print(f"Exploring node {node.state}, count: {cpt}")
 
         # Mark the node as explored
         explored.add(node.state)
@@ -126,7 +123,6 @@ def shortest_path(source, target):
                     path.reverse()
                     return path
                 frontier.add(child)
-
 
 def person_id_for_name(name):
     """
